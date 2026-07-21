@@ -16,7 +16,7 @@ const DRIVE_CONFIG = {
 
   // The ID of the "Live" folder in Google Drive (the long string of
   // letters/numbers in the folder's URL after /folders/).
-  LIVE_FOLDER_ID: '19E3040XWQ2v3yVBsrifTnx_-wAlsOr5P',
+  LIVE_FOLDER_ID: '1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd',
 };
 
 document.addEventListener('DOMContentLoaded', loadBulletinGallery);
