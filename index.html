@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Igreja Nossa Senhora de Fátima — Brentwood Park, Benoni</title>
+<meta name="description" content="Our Lady of Fátima Portuguese Catholic Church, Brentwood Park, Benoni. Mass times, parish bulletins, hall rental and contact details.">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ROSARY SCROLL TRAIL -->
+<div class="rosary-trail" id="rosaryTrail" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-brand">
+    <div class="nav-logo">
+      <!-- Replace logo.jpg with a photo of the church or parish crest -->
+      <img src="img/logo.jpg" alt="Igreja Nossa Senhora de Fátima" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;fallback-initial&quot;>F</span>'">
+    </div>
+    <div class="nav-name">N. Sra. de Fátima<span>Brentwood Park, Benoni</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#mass-times">Mass Times</a></li>
+    <li><a href="#bulletins">Bulletins</a></li>
+    <li><a href="history.html">Our History</a></li>
+    <li><a href="#hall-rental">Hall Rental</a></li>
+    <li><a href="#contact" class="nav-btn">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <a href="#mass-times">Mass Times</a>
+  <a href="#bulletins">Bulletins</a>
+  <a href="history.html">Our History</a>
+  <a href="#hall-rental">Hall Rental</a>
+  <a href="#contact" class="drawer-btn">📞 Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Portuguese Catholic Parish · Benoni</div>
+      <h1 class="hero-h1">Nossa Senhora<br><em>de Fátima</em><br><span class="gold">Brentwood Park</span></h1>
+      <p class="hero-sub">
+        A parish community rooted in devotion to Our Lady of Fátima since the 1940s.
+        All are welcome to join us for Mass, browse our latest bulletins, or reach out
+        to the parish office below.
+      </p>
+      <div class="hero-btns">
+        <a href="#mass-times" class="btn-primary">🕊️ View Mass Times</a>
+        <a href="#hall-rental" class="btn-secondary">🏛️ Rent the Parish Hall</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-top-bar"></div>
+      <div class="stat-pair">
+        <div class="stat-box">
+          <span class="stat-num">1945</span>
+          <span class="stat-lbl">Foundation Stone Blessed</span>
+        </div>
+        <div class="stat-box gold">
+          <span class="stat-num">1st</span>
+          <span class="stat-lbl">Fátima Church in S.A.</span>
+        </div>
+      </div>
+      <div class="hero-rule"></div>
+      <div class="certs-label">Parish at a Glance</div>
+      <div class="cert-list">
+        <div class="cert-row"><span class="cert-dot"></span>4 Masses every Saturday &amp; Sunday</div>
+        <div class="cert-row"><span class="cert-dot"></span>Daily Mass, Monday–Friday</div>
+        <div class="cert-row"><span class="cert-dot"></span>Portuguese &amp; English community</div>
+        <div class="cert-row"><span class="cert-dot"></span>Parish hall available for hire</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASS TIMES -->
+<section id="mass-times" class="section-pad">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Join Us</div>
+    <h2 class="section-h2 reveal">Mass <em>Times</em></h2>
+    <p class="section-lead reveal">These are placeholder times — edit them directly in this page's HTML to match your parish schedule.</p>
+
+    <div class="schedule-grid">
+      <div class="schedule-card reveal">
+        <div class="schedule-day">Weekdays</div>
+        <div class="schedule-note">Monday – Friday</div>
+        <div class="time-row"><span class="time-val">06:30</span><span class="time-lbl">Morning Mass</span></div>
+        <div class="time-row"><span class="time-val">18:00</span><span class="time-lbl">Evening Mass</span></div>
+      </div>
+
+      <div class="schedule-card reveal">
+        <div class="schedule-day">Saturday</div>
+        <div class="schedule-note">4 Masses</div>
+        <div class="time-row"><span class="time-val">06:30</span><span class="time-lbl">Morning Mass</span></div>
+        <div class="time-row"><span class="time-val">08:00</span><span class="time-lbl">Morning Mass</span></div>
+        <div class="time-row"><span class="time-val">17:00</span><span class="time-lbl">Vigil Mass</span></div>
+        <div class="time-row"><span class="time-val">19:00</span><span class="time-lbl">Vigil Mass (Portuguese)</span></div>
+      </div>
+
+      <div class="schedule-card featured reveal">
+        <div class="schedule-day">Sunday</div>
+        <div class="schedule-note">4 Masses</div>
+        <div class="time-row"><span class="time-val">07:00</span><span class="time-lbl">Morning Mass</span></div>
+        <div class="time-row"><span class="time-val">09:00</span><span class="time-lbl">Morning Mass (Portuguese)</span></div>
+        <div class="time-row"><span class="time-val">11:00</span><span class="time-lbl">Morning Mass</span></div>
+        <div class="time-row"><span class="time-val">18:00</span><span class="time-lbl">Evening Mass</span></div>
+      </div>
+    </div>
+
+    <div class="schedule-editnote reveal">✏️ To edit: open <code>index.html</code>, find the <code>#mass-times</code> section, and change the times/labels in each <code>.time-row</code>.</div>
+  </div>
+</section>
+
+<!-- BULLETINS -->
+<section id="bulletins" class="section-pad">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Stay Informed</div>
+    <h2 class="section-h2 reveal">Parish <em>Bulletins</em> &amp; Notices</h2>
+    <p class="section-lead reveal">The latest bulletins, flyers and notices, updated automatically whenever the parish office emails them in.</p>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-loading">Loading bulletins…</div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TEASER -->
+<section id="history-teaser" class="section-pad">
+  <div class="section-inner">
+    <div class="history-grid">
+      <div class="history-text">
+        <div class="eyebrow reveal">Since 1943</div>
+        <h2 class="section-h2 reveal">Our <em>History</em></h2>
+        <div class="rule-color reveal"></div>
+        <p class="reveal">Our parish began as a mission serving Portuguese and Mozambican families who had settled in the area, and grew into the first church in South Africa dedicated to Our Lady of Fátima — a story of faith carried across generations.</p>
+        <a href="history.html" class="btn-primary reveal">📖 Read the Full History</a>
+      </div>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div><div class="tl-year">1943</div><div class="tl-title">Mission Founded</div><div class="tl-desc">A mission was established to serve Portuguese and Mozambican families in the area.</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div><div class="tl-year">1945</div><div class="tl-title">Foundation Stone Blessed</div><div class="tl-desc">The Bishop of Johannesburg blessed the foundation stone on 16 May.</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div></div>
+          <div><div class="tl-year">1948</div><div class="tl-title">Church Inaugurated</div><div class="tl-desc">The completed church, seating around 300, was inaugurated on 13 November.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HALL RENTAL -->
+<section id="hall-rental" class="section-pad">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Book a Venue</div>
+    <h2 class="section-h2 reveal">Rent the <em>Parish Hall</em></h2>
+    <p class="section-lead reveal">Complete the form below to request the parish hall for your event. The parish office will confirm availability and next steps.</p>
+
+    <div class="form-panel reveal">
+      <div class="form-panel-head">
+        <h3>Parish Hall Rental Request</h3>
+        <p>Please complete all fields so the office can process your request as quickly as possible.</p>
+      </div>
+      <div class="form-pills">
+        <span class="pill">Event date &amp; time</span>
+        <span class="pill">Expected guests</span>
+        <span class="pill">Type of event</span>
+        <span class="pill">Contact details</span>
+        <span class="pill">Setup requirements</span>
+      </div>
+      <div class="form-embed">
+        <!-- Replace REPLACE_WITH_YOUR_FORM_ID with your actual Google Form ID -->
+        <iframe src="https://docs.google.com/forms/d/e/REPLACE_WITH_YOUR_FORM_ID/viewform?embedded=true" title="Parish Hall Rental Request Form">Loading form…</iframe>
+      </div>
+      <div class="form-footer">
+        <p>💡 If the form doesn't display above, use the button to open it directly in a new tab.</p>
+        <a href="https://docs.google.com/forms/d/e/REPLACE_WITH_YOUR_FORM_ID/viewform" target="_blank" class="ext-btn">
+          Open Form
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Get in Touch</div>
+    <h2 class="section-h2 reveal">Contact &amp; <em>Location</em></h2>
+    <p class="section-lead reveal">Reach the parish office directly, or find us at Brentwood Park.</p>
+
+    <div class="contact-layout">
+      <div class="contact-sidebar">
+        <div class="info-card reveal">
+          <div class="info-lbl">📍 Address</div>
+          <div class="info-val">54 Great North Rd<br>Brentwood Park AH, Benoni<br>Gauteng, South Africa</div>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-lbl">☎️ Parish Secretary</div>
+          <div class="info-val placeholder"><a href="tel:0000000000">082 000 0000 — ADD SECRETARY'S NUMBER</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-lbl">✝️ Parish Priest</div>
+          <div class="info-val placeholder"><a href="tel:0000000000">082 000 0000 — ADD PRIEST'S NUMBER</a></div>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-lbl">✉️ Parish Email</div>
+          <div class="info-val placeholder"><a href="mailto:parish@example.com">parish@example.com — ADD CHURCH EMAIL</a></div>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:6px;font-weight:500;">(This is the church's public email — not the bulletin-upload address.)</div>
+        </div>
+
+        <div class="map-box reveal">
+          <iframe src="https://www.google.com/maps?q=Igreja+Nossa+Senhora+da+Fatima,+54+Great+North+Rd,+Brentwood+Park+AH,+Benoni&z=16&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to the church"></iframe>
+        </div>
+        <a href="https://maps.app.goo.gl/76GfUaRhtNnBrncL6?g_st=ic" target="_blank" class="dir-btn reveal">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+
+      <div class="contact-main">
+        <div class="social-card reveal">
+          <div>
+            <h4>Follow the Parish on Facebook</h4>
+            <p>News, event photos and reminders posted between bulletins.</p>
+          </div>
+          <!-- Replace with the real Facebook page URL -->
+          <a href="https://facebook.com/REPLACE_WITH_PAGE_NAME" target="_blank" class="fb-btn">📘 Visit Facebook Page</a>
+        </div>
+
+        <div class="info-card reveal">
+          <div class="info-lbl">🕊️ Bulletin Uploads (Office Use)</div>
+          <div class="info-val" style="font-weight:600;font-size:0.85rem;color:var(--text-soft);">insf-website@gmail.com is used only to automatically update the bulletin gallery above — it is not a general parish contact address.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Igreja Nossa Senhora de Fátima</div>
+      <p class="footer-desc">Our Lady of Fátima Portuguese Catholic Church — Brentwood Park, Benoni. The first church in South Africa dedicated to Our Lady of Fátima.</p>
+      <div class="footer-badge">🕯️ Established 1945</div>
+    </div>
+    <div>
+      <p class="fcol-title">Navigation</p>
+      <ul class="flinks">
+        <li><a href="#mass-times">Mass Times</a></li>
+        <li><a href="#bulletins">Bulletins</a></li>
+        <li><a href="history.html">Our History</a></li>
+        <li><a href="#hall-rental">Hall Rental</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fcol-title">Contact</p>
+      <ul class="flinks">
+        <li><a href="tel:0000000000">082 000 0000 — ADD NUMBER</a></li>
+        <li><a href="mailto:parish@example.com">parish@example.com — ADD EMAIL</a></li>
+        <li class="plain">54 Great North Rd<br>Brentwood Park AH, Benoni</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Igreja Nossa Senhora de Fátima, Brentwood Park. All rights reserved.</p>
+    <p>Benoni, Gauteng, South Africa</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/gallery.js"></script>
+</body>
+</html>
