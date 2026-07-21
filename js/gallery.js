@@ -12,11 +12,11 @@
 const DRIVE_CONFIG = {
   // Get this from Google Cloud Console → APIs & Services → Credentials.
   // Must be restricted to the Google Drive API and to your website's domain.
-  API_KEY: 'AIzaSyCZc4SIxcADa7Xkzqwic3_b8S4uzLE4NZM',
+  API_KEY: 'AIzaSyDrPlwlZADTG3n5uIF0Q6wVJhazwG59m9s',
 
   // The ID of the "Live" folder in Google Drive (the long string of
   // letters/numbers in the folder's URL after /folders/).
-  LIVE_FOLDER_ID: '1UFEq9dZ_6VHjbnvq2Rp9pCHV19z7-rMX',
+  LIVE_FOLDER_ID: '19E3040XWQ2v3yVBsrifTnx_-wAlsOr5P',
 };
 
 document.addEventListener('DOMContentLoaded', loadBulletinGallery);

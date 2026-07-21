@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * BULLETIN AUTOMATION — insf-website@gmail.com
+ * BULLETIN AUTOMATION — website.insf@gmail.com
  * ============================================================
  * What this does, every time it runs:
  *   1. Looks for the newest unprocessed email with attachments
