@@ -43,9 +43,6 @@ async function loadBulletinGallery() {
 
 function renderCard(file) {
   const isImage = file.mimeType && file.mimeType.startsWith('image/');
-  const date = file.createdTime
-    ? new Date(file.createdTime).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })
-    : '';
 
   const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
   const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
@@ -61,14 +58,9 @@ function renderCard(file) {
     thumbHtml = `<span class="icon">📄</span>`;
   }
 
-  // style="opacity:1 !important; transform:none !important;" guarantees visibility regardless of scroll triggers
   return `
     <a class="gallery-card" style="opacity: 1 !important; transform: none !important;" href="${viewUrl}" target="_blank" rel="noopener">
       <div class="gallery-thumb">${thumbHtml}</div>
-      <div class="gallery-meta">
-        <div class="gallery-name">${escapeHtml(file.name)}</div>
-        <div class="gallery-date">${date}</div>
-      </div>
     </a>`;
 }
 
