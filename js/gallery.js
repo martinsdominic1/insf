@@ -31,7 +31,8 @@ async function loadBulletinGallery() {
   }
 
   try {
-    const fields = 'files(id,name,mimeType,thumbnailLink,webViewLink,createdTime)';
+    // Added webContentLink to API fields
+    const fields = 'files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink,createdTime)';
     const q = encodeURIComponent(`'${DRIVE_CONFIG.LIVE_FOLDER_ID}' in parents and trashed = false`);
     const url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=${fields}&orderBy=createdTime&key=${DRIVE_CONFIG.API_KEY}`;
 
@@ -58,13 +59,28 @@ function renderCard(file) {
     ? new Date(file.createdTime).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })
     : '';
 
-  const thumb = isImage && file.thumbnailLink
-    ? `<img src="${file.thumbnailLink.replace('=s220', '=s600')}" alt="${escapeHtml(file.name)}" loading="lazy">`
-    : `<span class="icon">📄</span>`;
+  // Direct CDN link for images
+  const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
+  
+  // High-resolution thumbnail for PDFs
+  const pdfCoverUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
+  
+  // Direct file URL when clicked
+  const viewUrl = isImage ? actualImageUrl : `https://drive.google.com/uc?export=view&id=${file.id}`;
+
+  let thumbHtml = '';
+
+  if (isImage) {
+    thumbHtml = `<img src="${actualImageUrl}" alt="${escapeHtml(file.name)}" loading="lazy">`;
+  } else if (pdfCoverUrl) {
+    thumbHtml = `<img src="${pdfCoverUrl}" alt="${escapeHtml(file.name)}" loading="lazy" onerror="this.onerror=null; this.parentNode.innerHTML='<span class=\"icon\">📄</span>';">`;
+  } else {
+    thumbHtml = `<span class="icon">📄</span>`;
+  }
 
   return `
-    <a class="gallery-card reveal" href="${file.webViewLink}" target="_blank" rel="noopener">
-      <div class="gallery-thumb">${thumb}</div>
+    <a class="gallery-card reveal" href="${viewUrl}" target="_blank" rel="noopener">
+      <div class="gallery-thumb">${thumbHtml}</div>
       <div class="gallery-meta">
         <div class="gallery-name">${escapeHtml(file.name)}</div>
         <div class="gallery-date">${date}</div>
