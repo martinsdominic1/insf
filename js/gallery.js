@@ -47,13 +47,8 @@ function renderCard(file) {
     ? new Date(file.createdTime).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })
     : '';
 
-  // Direct public CDN link for raw full images
   const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
-  
-  // High-res preview thumbnail for PDFs
   const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
-
-  // Link location when clicking the card
   const viewUrl = isImage ? actualImageUrl : `https://drive.google.com/uc?export=view&id=${file.id}`;
 
   let thumbHtml = '';
@@ -66,9 +61,9 @@ function renderCard(file) {
     thumbHtml = `<span class="icon">📄</span>`;
   }
 
-  // Uses "gallery-card visible" instead of "reveal" so dynamic cards are immediately visible
+  // style="opacity:1 !important; transform:none !important;" guarantees visibility regardless of scroll triggers
   return `
-    <a class="gallery-card visible" href="${viewUrl}" target="_blank" rel="noopener">
+    <a class="gallery-card" style="opacity: 1 !important; transform: none !important;" href="${viewUrl}" target="_blank" rel="noopener">
       <div class="gallery-thumb">${thumbHtml}</div>
       <div class="gallery-meta">
         <div class="gallery-name">${escapeHtml(file.name)}</div>
