@@ -53,7 +53,7 @@ function renderCard(file) {
   if (isImage) {
     thumbHtml = `<img src="${actualImageUrl}" alt="${escapeHtml(file.name)}" loading="lazy">`;
   } else if (driveThumbUrl) {
-    thumbHtml = `<img src="${driveThumbUrl}" alt="${escapeHtml(file.name)}" loading="lazy" onerror="this.onerror=null; this.parentNode.innerHTML='<span class=\"icon\">📄</span>';">`;
+    thumbHtml = `<img src="${driveThumbUrl}" alt="${escapeHtml(file.name)}" loading="lazy" onerror="this.style.display='none';">`;
   } else {
     thumbHtml = `<span class="icon">📄</span>`;
   }
