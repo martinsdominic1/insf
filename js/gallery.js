@@ -1,21 +1,10 @@
 /* ============================================================
    BULLETIN GALLERY — pulls files from a public Google Drive
-   folder (the "live" folder the Apps Script keeps updated)
-   and renders them in our own gallery grid. No Google Drive
-   UI is ever shown to visitors.
-
-   ⚠️ REQUIRED SETUP — fill in the three values below.
-   See README.md section "3. Connect the website to Drive"
-   for exactly how to get each one.
+   folder and renders them in our own gallery grid.
    ============================================================ */
 
 const DRIVE_CONFIG = {
-  // Get this from Google Cloud Console → APIs & Services → Credentials.
-  // Must be restricted to the Google Drive API and to your website's domain.
   API_KEY: 'AIzaSyDrPlwlZADTG3n5uIF0Q6wVJhazwG59m9s',
-
-  // The ID of the "Live" folder in Google Drive (the long string of
-  // letters/numbers in the folder's URL after /folders/).
   LIVE_FOLDER_ID: '1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd',
 };
 
@@ -31,8 +20,7 @@ async function loadBulletinGallery() {
   }
 
   try {
-    // Added webContentLink to API fields
-    const fields = 'files(id,name,mimeType,thumbnailLink,webViewLink,webContentLink,createdTime)';
+    const fields = 'files(id,name,mimeType,thumbnailLink,webViewLink,createdTime)';
     const q = encodeURIComponent(`'${DRIVE_CONFIG.LIVE_FOLDER_ID}' in parents and trashed = false`);
     const url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=${fields}&orderBy=createdTime&key=${DRIVE_CONFIG.API_KEY}`;
 
@@ -59,27 +47,28 @@ function renderCard(file) {
     ? new Date(file.createdTime).toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' })
     : '';
 
-  // Direct CDN link for images
+  // Direct public CDN link for raw full images
   const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
   
-  // High-resolution thumbnail for PDFs
-  const pdfCoverUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
-  
-  // Direct file URL when clicked
+  // High-res preview thumbnail for PDFs
+  const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
+
+  // Link location when clicking the card
   const viewUrl = isImage ? actualImageUrl : `https://drive.google.com/uc?export=view&id=${file.id}`;
 
   let thumbHtml = '';
 
   if (isImage) {
     thumbHtml = `<img src="${actualImageUrl}" alt="${escapeHtml(file.name)}" loading="lazy">`;
-  } else if (pdfCoverUrl) {
-    thumbHtml = `<img src="${pdfCoverUrl}" alt="${escapeHtml(file.name)}" loading="lazy" onerror="this.onerror=null; this.parentNode.innerHTML='<span class=\"icon\">📄</span>';">`;
+  } else if (driveThumbUrl) {
+    thumbHtml = `<img src="${driveThumbUrl}" alt="${escapeHtml(file.name)}" loading="lazy" onerror="this.onerror=null; this.parentNode.innerHTML='<span class=\"icon\">📄</span>';">`;
   } else {
     thumbHtml = `<span class="icon">📄</span>`;
   }
 
+  // Uses "gallery-card visible" instead of "reveal" so dynamic cards are immediately visible
   return `
-    <a class="gallery-card reveal" href="${viewUrl}" target="_blank" rel="noopener">
+    <a class="gallery-card visible" href="${viewUrl}" target="_blank" rel="noopener">
       <div class="gallery-thumb">${thumbHtml}</div>
       <div class="gallery-meta">
         <div class="gallery-name">${escapeHtml(file.name)}</div>
