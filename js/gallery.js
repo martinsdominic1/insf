@@ -51,16 +51,17 @@ function renderCard(file) {
   let thumbHtml = '';
 
   if (isImage) {
-    thumbHtml = `<img src="${actualImageUrl}" alt="${escapeHtml(file.name)}" loading="lazy">`;
+    thumbHtml = `<img src="${actualImageUrl}" alt="" loading="lazy">`;
   } else if (driveThumbUrl) {
-    thumbHtml = `<img src="${driveThumbUrl}" alt="${escapeHtml(file.name)}" loading="lazy" onerror="this.style.display='none';">`;
-  } else {
-    thumbHtml = `<span class="icon">📄</span>`;
+    thumbHtml = `<img src="${driveThumbUrl}" alt="" loading="lazy" onerror="this.style.display='none';">`;
   }
 
   return `
     <a class="gallery-card" style="opacity: 1 !important; transform: none !important;" href="${viewUrl}" target="_blank" rel="noopener">
       <div class="gallery-thumb">${thumbHtml}</div>
+      <div class="gallery-action">
+        <span class="gallery-btn">Click here to view 🔍</span>
+      </div>
     </a>`;
 }
 
