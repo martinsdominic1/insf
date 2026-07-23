@@ -43,20 +43,36 @@ async function loadBulletinGallery() {
 
 function renderCard(file) {
   const isImage = file.mimeType && file.mimeType.startsWith('image/');
+
+  const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
+  const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : actualImageUrl;
   
-  // Notice the '/preview' URL format for Google Drive PDFs
-  const embedUrl = isImage ? `https://lh3.googleusercontent.com/d/${file.id}` : `https://drive.google.com/file/d/${file.id}/preview`;
+  // Use /preview for PDFs so Google Drive renders inside our iframe without downloading
+  const embedUrl = isImage ? actualImageUrl : `https://drive.google.com/file/d/${file.id}/preview`;
 
-  const contentHtml = isImage
-    ? `<img src="${embedUrl}" style="width:100%; height:auto;" alt="Bulletin" loading="lazy">`
-    : `<iframe src="${embedUrl}" style="width:100%; height:600px; border:none;" title="Bulletin PDF Viewer"></iframe>`;
-
+  // Instead of an <a> link, we use a button/div that calls our modal opener function
   return `
-    <div class="gallery-card inline-viewer">
-      <div class="gallery-body">
-        ${contentHtml}
+    <div class="gallery-card" onclick="openBulletinModal('${embedUrl}', ${isImage})" style="cursor: pointer;">
+      <div class="gallery-thumb">
+        <img src="${driveThumbUrl}" alt="Bulletin preview" loading="lazy">
+      </div>
+      <div class="gallery-action">
+        <span class="gallery-btn">🔍 Tap to View Bulletin</span>
       </div>
     </div>`;
+}
+
+// Companion function to display the popup overlay:
+function openBulletinModal(url, isImage) {
+  const modal = document.getElementById('bulletinModal');
+  const modalContainer = document.getElementById('modalContainer');
+
+  // Insert an <img> for images or an <iframe> for PDFs
+  modalContainer.innerHTML = isImage
+    ? `<img src="${url}" style="max-width:100%; height:auto;" />`
+    : `<iframe src="${url}" style="width:100%; height:80vh; border:none;"></iframe>`;
+
+  modal.style.display = 'flex'; // Shows the overlay
 }
 
 function escapeHtml(str) {
