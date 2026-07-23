@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bulletin Viewer Comparison — Igreja Nossa Senhora de Fátima</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --blue:        #3E7CA6;
+    --blue-dark:   #26506E;
+    --blue-pale:   #EAF4FA;
+    --gold:        #C9A24B;
+    --gold-pale:   #FBF3DF;
+    --bg:          #F7FBFD;
+    --text:        #1B2E38;
+    --text-soft:   #5C7986;
+    --border:      #DCE9F0;
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 40px 20px;
+    margin: 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; text-align: center; margin-bottom: 8px; }
+  p.sub { text-align: center; color: var(--text-soft); margin-bottom: 40px; }
+
+  .demo-section {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+  }
+
+  .demo-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+  }
+
+  .demo-desc { font-size: 0.92rem; color: var(--text-soft); margin-bottom: 24px; }
+
+  /* Shared Card Styles */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--blue); }
+  .card-btn {
+    display: inline-block; margin-top: 10px; padding: 8px 16px;
+    background: var(--blue); color: white; font-weight: 700;
+    font-size: 0.85rem; border-radius: 6px;
+  }
+
+  /* -------------------------------------------------------------
+     OPTION 1: MODAL POPUP STYLING
+     ------------------------------------------------------------- */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 30, 40, 0.82);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: none; justify-content: center; align-items: center;
+    padding: 20px;
+  }
+
+  .modal-content {
+    background: white; width: 100%; max-width: 900px;
+    border-radius: 16px; overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+
+  .modal-header {
+    padding: 14px 20px; background: var(--blue-dark); color: white;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .close-btn {
+    background: var(--gold); color: var(--text); border: none;
+    padding: 8px 18px; font-weight: 800; font-size: 0.9rem;
+    border-radius: 50px; cursor: pointer;
+  }
+  .close-btn:hover { background: #e0b85c; }
+
+  .modal-body { height: 75vh; width: 100%; }
+  .modal-body iframe { width: 100%; height: 100%; border: none; }
+
+  /* -------------------------------------------------------------
+     OPTION 2: PRIMARY EMBEDDED VIEWER STYLING
+     ------------------------------------------------------------- */
+  .primary-viewer-box {
+    width: 100%; height: 600px; border-radius: 12px;
+    border: 1px solid var(--border); overflow: hidden;
+    margin-bottom: 20px; background: var(--bg);
+  }
+  .primary-viewer-box iframe { width: 100%; height: 100%; border: none; }
+
+  .selector-btn {
+    padding: 12px 16px; background: white; border: 1px solid var(--border);
+    border-radius: 10px; text-align: left; font-weight: 700; cursor: pointer;
+  }
+  .selector-btn.active { border-color: var(--blue); background: var(--blue-pale); color: var(--blue-dark); }
+
+  /* -------------------------------------------------------------
+     OPTION 3: INLINE EMBEDDED CARDS STYLING
+     ------------------------------------------------------------- */
+  .inline-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+  }
+  .inline-card-header { padding: 12px 16px; background: var(--blue-pale); font-weight: 700; border-bottom: 1px solid var(--border); }
+  .inline-card-body { height: 450px; }
+  .inline-card-body iframe { width: 100%; height: 100%; border: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Bulletin Display Options Test</h1>
+  <p class="sub">Compare all 3 direct-in-website PDF preview implementations on one page.</p>
+
+  <!-- =============================================================
+       OPTION 1: LIGHTBOX MODAL OVERLAY
+       ============================================================= -->
+  <section class="demo-section">
+    <div class="demo-title">Option 1: Lightbox Popup Overlay</div>
+    <div class="demo-desc">Clicking a bulletin card launches an overlay box with a prominent close button. The user never leaves the homepage.</div>
+
+    <div class="grid">
+      <div class="card" onclick="openModal('https://drive.google.com/file/d/1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd/preview')">
+        <h3>📄 Sunday Bulletin (19 May)</h3>
+        <span class="card-btn">🔍 Tap to View Inside Popup</span>
+      </div>
+      <div class="card" onclick="openModal('https://drive.google.com/file/d/1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd/preview')">
+        <h3>📄 Sunday Bulletin (12 May)</h3>
+        <span class="card-btn">🔍 Tap to View Inside Popup</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       OPTION 2: PRIMARY ON-PAGE EMBEDDED VIEWER
+       ============================================================= -->
+  <section class="demo-section">
+    <div class="demo-title">Option 2: Primary On-Page Embedded Viewer</div>
+    <div class="demo-desc">The newest bulletin is open and readable directly on the homepage by default. Older bulletins act as selector tabs below it.</div>
+
+    <div class="primary-viewer-box" id="primaryViewer">
+      <iframe id="mainIframe" src="https://drive.google.com/file/d/1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd/preview"></iframe>
+    </div>
+
+    <div class="grid">
+      <button class="selector-btn active" onclick="switchMainBulletin('https://drive.google.com/file/d/1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd/preview', this)">
+        📄 Current Week Bulletin (19 May)
+      </button>
+      <button class="selector-btn" onclick="switchMainBulletin('https://drive.google.com/file/d/1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd/preview', this)">
+        📄 Last Week Bulletin (12 May)
+      </button>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       OPTION 3: INLINE EMBEDDED CARDS
+       ============================================================= -->
+  <section class="demo-section">
+    <div class="demo-title">Option 3: Direct Inline Embedded Grid</div>
+    <div class="demo-desc">Every bulletin card contains a direct mini-viewer frame embedded into the layout grid. Zero clicks required to read.</div>
+
+    <div class="grid">
+      <div class="inline-card">
+        <div class="inline-card-header">📄 Sunday Bulletin (19 May)</div>
+        <div class="inline-card-body">
+          <iframe src="https://drive.google.com/file/d/1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd/preview"></iframe>
+        </div>
+      </div>
+      <div class="inline-card">
+        <div class="inline-card-header">📄 Sunday Bulletin (12 May)</div>
+        <div class="inline-card-body">
+          <iframe src="https://drive.google.com/file/d/1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd/preview"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL OVERLAY CONTAINER (used by Option 1) -->
+<div class="modal-overlay" id="bulletinModal" onclick="closeModalOnBg(event)">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span style="font-weight:700;">Parish Bulletin Viewer</span>
+      <button class="close-btn" onclick="closeModal()">✕ Close & Return to Site</button>
+    </div>
+    <div class="modal-body">
+      <iframe id="modalIframe" src="about:blank"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* Option 1 Logic */
+  function openModal(url) {
+    document.getElementById('modalIframe').src = url;
+    document.getElementById('bulletinModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('bulletinModal').style.display = 'none';
+    document.getElementById('modalIframe').src = 'about:blank';
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnBg(e) {
+    if (e.target.id === 'bulletinModal') closeModal();
+  }
+
+  /* Option 2 Logic */
+  function switchMainBulletin(url, btnElement) {
+    document.getElementById('mainIframe').src = url;
+    document.querySelectorAll('.selector-btn').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
