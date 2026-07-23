@@ -288,15 +288,16 @@
 
 <script src="js/main.js"></script>
 <script src="js/gallery.js"></script>
-<!-- BULLETIN LIGHTBOX MODAL OVERLAY -->
-<div class="bulletin-modal-overlay" id="bulletinModal" onclick="closeBulletinModalOnBg(event)" aria-hidden="true">
-  <div class="bulletin-modal-card">
-    <div class="bulletin-modal-header">
-      <span class="bulletin-modal-title">📄 Parish Bulletin</span>
-      <button class="bulletin-modal-close" onclick="closeBulletinModal()">✕ Close &amp; Return to Site</button>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="bulletinModal" onclick="closeModalOnBg(event)" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span style="font-weight:700;">Parish Bulletin</span>
+      <button class="close-btn" onclick="closeModal()">✕ Close &amp; Return to Site</button>
     </div>
-    <div class="bulletin-modal-body" id="bulletinModalBody">
-      <!-- Embedded PDF viewer or image populates here -->
+    <div class="modal-body" id="modalBody">
+      <!-- Embedded PDF or Image loads here dynamically -->
     </div>
   </div>
 </div>
