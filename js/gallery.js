@@ -43,26 +43,20 @@ async function loadBulletinGallery() {
 
 function renderCard(file) {
   const isImage = file.mimeType && file.mimeType.startsWith('image/');
+  
+  // Notice the '/preview' URL format for Google Drive PDFs
+  const embedUrl = isImage ? `https://lh3.googleusercontent.com/d/${file.id}` : `https://drive.google.com/file/d/${file.id}/preview`;
 
-  const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
-  const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
-  const viewUrl = `https://drive.google.com/file/d/${file.id}/preview`;
-
-  let thumbHtml = '';
-
-  if (isImage) {
-    thumbHtml = `<img src="${actualImageUrl}" alt="" loading="lazy">`;
-  } else if (driveThumbUrl) {
-    thumbHtml = `<img src="${driveThumbUrl}" alt="" loading="lazy" onerror="this.style.display='none';">`;
-  }
+  const contentHtml = isImage
+    ? `<img src="${embedUrl}" style="width:100%; height:auto;" alt="Bulletin" loading="lazy">`
+    : `<iframe src="${embedUrl}" style="width:100%; height:600px; border:none;" title="Bulletin PDF Viewer"></iframe>`;
 
   return `
-    <a class="gallery-card" style="opacity: 1 !important; transform: none !important;" href="${viewUrl}" target="_blank" rel="noopener">
-      <div class="gallery-thumb">${thumbHtml}</div>
-      <div class="gallery-action">
-        <span class="gallery-btn">Click here to view 🔍</span>
+    <div class="gallery-card inline-viewer">
+      <div class="gallery-body">
+        ${contentHtml}
       </div>
-    </a>`;
+    </div>`;
 }
 
 function escapeHtml(str) {
