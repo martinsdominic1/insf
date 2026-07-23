@@ -1,6 +1,6 @@
 /* ============================================================
-   BULLETIN GALLERY — pulls files from Google Drive and opens
-   them directly inside the .modal-overlay window.
+   BULLETIN GALLERY — pulls files from a public Google Drive
+   folder and renders them in our own gallery grid.
    ============================================================ */
 
 const DRIVE_CONFIG = {
@@ -43,50 +43,24 @@ async function loadBulletinGallery() {
 
 function renderCard(file) {
   const isImage = file.mimeType && file.mimeType.startsWith('image/');
-  const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
-  const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : actualImageUrl;
   
-  const previewUrl = isImage ? actualImageUrl : `https://drive.google.com/file/d/${file.id}/preview`;
+  // Notice the '/preview' URL format for Google Drive PDFs
+  const embedUrl = isImage ? `https://lh3.googleusercontent.com/d/${file.id}` : `https://drive.google.com/file/d/${file.id}/preview`;
 
-  let thumbHtml = isImage
-    ? `<img src="${actualImageUrl}" alt="Bulletin" loading="lazy">`
-    : (driveThumbUrl ? `<img src="${driveThumbUrl}" alt="Bulletin" loading="lazy" onerror="this.style.display='none';">` : '');
+  const contentHtml = isImage
+    ? `<img src="${embedUrl}" style="width:100%; height:auto;" alt="Bulletin" loading="lazy">`
+    : `<iframe src="${embedUrl}" style="width:100%; height:600px; border:none;" title="Bulletin PDF Viewer"></iframe>`;
 
   return `
-    <div class="gallery-card" onclick="openModal('${previewUrl}', ${isImage})" style="opacity: 1 !important; transform: none !important; cursor: pointer;">
-      <div class="gallery-thumb">${thumbHtml}</div>
-      <div class="gallery-action">
-        <span class="gallery-btn">Click to view 🔍</span>
+    <div class="gallery-card inline-viewer">
+      <div class="gallery-body">
+        ${contentHtml}
       </div>
     </div>`;
 }
 
-/* Modal Functions matching your exact markup */
-function openModal(url, isImage) {
-  const modal = document.getElementById('bulletinModal');
-  const modalBody = document.getElementById('modalBody');
-  if (!modal || !modalBody) return;
-
-  modalBody.innerHTML = isImage
-    ? `<img src="${url}" alt="Bulletin Page">`
-    : `<iframe src="${url}" title="Bulletin PDF Preview"></iframe>`;
-
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  const modal = document.getElementById('bulletinModal');
-  const modalBody = document.getElementById('modalBody');
-  if (!modal) return;
-
-  modal.style.display = 'none';
-  if (modalBody) modalBody.innerHTML = '';
-  document.body.style.overflow = '';
-}
-
-function closeModalOnBg(e) {
-  if (e.target.id === 'bulletinModal' || e.target.classList.contains('modal-overlay')) {
-    closeModal();
-  }
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
 }
