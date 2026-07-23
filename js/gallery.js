@@ -1,6 +1,6 @@
 /* ============================================================
-   BULLETIN GALLERY — pulls files from a public Google Drive
-   folder and renders them in our own gallery grid.
+   BULLETIN GALLERY — pulls files from Google Drive and opens
+   them directly inside an on-page Lightbox Modal.
    ============================================================ */
 
 const DRIVE_CONFIG = {
@@ -43,53 +43,53 @@ async function loadBulletinGallery() {
 
 function renderCard(file) {
   const isImage = file.mimeType && file.mimeType.startsWith('image/');
-
   const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
   const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : actualImageUrl;
   
-  // Use /preview for PDFs so Google Drive renders inside our iframe without downloading
-  const embedUrl = isImage ? actualImageUrl : `https://drive.google.com/file/d/${file.id}/preview`;
+  // Use /preview link so Google Drive renders directly inside our modal iframe
+  const previewUrl = isImage ? actualImageUrl : `https://drive.google.com/file/d/${file.id}/preview`;
 
-  // Instead of an <a> link, we use a button/div that calls our modal opener function
+  let thumbHtml = isImage
+    ? `<img src="${actualImageUrl}" alt="Bulletin" loading="lazy">`
+    : (driveThumbUrl ? `<img src="${driveThumbUrl}" alt="Bulletin" loading="lazy" onerror="this.style.display='none';">` : '');
+
   return `
-    <div class="gallery-card" onclick="openBulletinModal('${embedUrl}', ${isImage})" style="cursor: pointer;">
-      <div class="gallery-thumb">
-        <img src="${driveThumbUrl}" alt="Bulletin preview" loading="lazy">
-      </div>
+    <div class="gallery-card" onclick="openBulletinModal('${previewUrl}', ${isImage})" style="opacity: 1 !important; transform: none !important; cursor: pointer;">
+      <div class="gallery-thumb">${thumbHtml}</div>
       <div class="gallery-action">
-        <span class="gallery-btn">🔍 Tap to View Bulletin</span>
+        <span class="gallery-btn">Click to view 🔍</span>
       </div>
     </div>`;
 }
 
-// Companion function to display the popup overlay:
+/* Modal Open / Close Logic */
 function openBulletinModal(url, isImage) {
   const modal = document.getElementById('bulletinModal');
-  const modalContainer = document.getElementById('modalContainer');
+  const body = document.getElementById('bulletinModalBody');
+  if (!modal || !body) return;
 
-  // Insert an <img> for images or an <iframe> for PDFs
-  modalContainer.innerHTML = isImage
-    ? `<img src="${url}" style="max-width:100%; height:auto;" />`
-    : `<iframe src="${url}" style="width:100%; height:80vh; border:none;"></iframe>`;
+  body.innerHTML = isImage
+    ? `<img src="${url}" alt="Bulletin Page">`
+    : `<iframe src="${url}" title="Bulletin PDF Preview"></iframe>`;
 
-  modal.style.display = 'flex'; // Shows the overlay
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeBulletinModal() {
-    const modal = document.getElementById('bulletinModal');
-    modal.style.display = 'none';
+  const modal = document.getElementById('bulletinModal');
+  const body = document.getElementById('bulletinModalBody');
+  if (!modal) return;
+
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  if (body) body.innerHTML = '';
+  document.body.style.overflow = '';
 }
 
-document.addEventListener('click', function (e) {
-    const modal = document.getElementById('bulletinModal');
-
-    if (e.target === modal) {
-        closeBulletinModal();
-    }
-});
+function closeBulletinModalOnBg(event) {
+  if (event.target.id === 'bulletinModal') {
+    closeBulletinModal();
+  }
+}

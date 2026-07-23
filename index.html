@@ -138,13 +138,6 @@
   </div>
 </section>
 
-<div id="bulletinModal" class="bulletin-modal" style="display:none;">
-    <div class="bulletin-modal-content">
-        <button class="bulletin-close" onclick="closeBulletinModal()">&times;</button>
-        <div id="modalContainer"></div>
-    </div>
-</div>
-
 <!-- HISTORY TEASER -->
 <section id="history-teaser" class="section-pad">
   <div class="section-inner">
@@ -295,5 +288,18 @@
 
 <script src="js/main.js"></script>
 <script src="js/gallery.js"></script>
+<!-- BULLETIN LIGHTBOX MODAL OVERLAY -->
+<div class="bulletin-modal-overlay" id="bulletinModal" onclick="closeBulletinModalOnBg(event)" aria-hidden="true">
+  <div class="bulletin-modal-card">
+    <div class="bulletin-modal-header">
+      <span class="bulletin-modal-title">📄 Parish Bulletin</span>
+      <button class="bulletin-modal-close" onclick="closeBulletinModal()">✕ Close &amp; Return to Site</button>
+    </div>
+    <div class="bulletin-modal-body" id="bulletinModalBody">
+      <!-- Embedded PDF viewer or image populates here -->
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
