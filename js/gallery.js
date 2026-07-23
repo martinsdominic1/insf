@@ -45,26 +45,35 @@ function renderCard(file) {
   const isImage = file.mimeType && file.mimeType.startsWith('image/');
 
   const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
-  const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
-  const viewUrl = `https://drive.google.com/file/d/${file.id}/preview`;
+  const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : actualImageUrl;
+  
+  // Use /preview for PDFs so Google Drive renders inside our iframe without downloading
+  const embedUrl = isImage ? actualImageUrl : `https://drive.google.com/file/d/${file.id}/preview`;
 
-  let thumbHtml = '';
-
-  if (isImage) {
-    thumbHtml = `<img src="${actualImageUrl}" alt="" loading="lazy">`;
-  } else if (driveThumbUrl) {
-    thumbHtml = `<img src="${driveThumbUrl}" alt="" loading="lazy" onerror="this.style.display='none';">`;
-  }
-
+  // Instead of an <a> link, we use a button/div that calls our modal opener function
   return `
-    <a class="gallery-card" style="opacity: 1 !important; transform: none !important;" href="${viewUrl}" target="_blank" rel="noopener">
-      <div class="gallery-thumb">${thumbHtml}</div>
-      <div class="gallery-action">
-        <span class="gallery-btn">Click here to view 🔍</span>
+    <div class="gallery-card" onclick="openBulletinModal('${embedUrl}', ${isImage})" style="cursor: pointer;">
+      <div class="gallery-thumb">
+        <img src="${driveThumbUrl}" alt="Bulletin preview" loading="lazy">
       </div>
-    </a>`;
+      <div class="gallery-action">
+        <span class="gallery-btn">🔍 Tap to View Bulletin</span>
+      </div>
+    </div>`;
 }
 
+// Companion function to display the popup overlay:
+function openBulletinModal(url, isImage) {
+  const modal = document.getElementById('bulletinModal');
+  const modalContainer = document.getElementById('modalContainer');
+
+  // Insert an <img> for images or an <iframe> for PDFs
+  modalContainer.innerHTML = isImage
+    ? `<img src="${url}" style="max-width:100%; height:auto;" />`
+    : `<iframe src="${url}" style="width:100%; height:80vh; border:none;"></iframe>`;
+
+  modal.style.display = 'flex'; // Shows the overlay
+}
 function escapeHtml(str) {
   const div = document.createElement('div');
   div.textContent = str;
