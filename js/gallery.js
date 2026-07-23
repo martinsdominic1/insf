@@ -80,3 +80,16 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
+
+function closeBulletinModal() {
+    const modal = document.getElementById('bulletinModal');
+    modal.style.display = 'none';
+}
+
+document.addEventListener('click', function (e) {
+    const modal = document.getElementById('bulletinModal');
+
+    if (e.target === modal) {
+        closeBulletinModal();
+    }
+});
