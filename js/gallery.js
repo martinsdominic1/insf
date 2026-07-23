@@ -46,7 +46,7 @@ function renderCard(file) {
 
   const actualImageUrl = `https://lh3.googleusercontent.com/d/${file.id}`;
   const driveThumbUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s800') : '';
-  const viewUrl = isImage ? actualImageUrl : `https://drive.google.com/uc?export=view&id=${file.id}`;
+  const viewUrl = isImage ? actualImageUrl : `https://drive.google.com/file/d/${file.id}/view`;
 
   let thumbHtml = '';
 
