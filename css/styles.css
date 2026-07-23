@@ -424,3 +424,33 @@ footer { background:#16262F; color:rgba(255,255,255,0.72); padding:64px 48px 36p
 .gallery-card:hover .gallery-btn {
   background: var(--blue-dark);
 }
+
+.bulletin-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.bulletin-modal-content {
+    background: white;
+    width: 95%;
+    max-width: 1100px;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+}
+
+.bulletin-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 32px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
