@@ -2,25 +2,6 @@
  * ============================================================
  * BULLETIN AUTOMATION — website.insf@gmail.com
  * ============================================================
- * What this does, every time it runs:
- *   1. Looks for the newest unprocessed email with attachments
- *      sent to this inbox.
- *   2. Moves everything currently in the "Live" Drive folder
- *      into an "Archive" folder, inside a subfolder stamped
- *      with today's date.
- *   3. Saves the new email's attachments into the "Live" folder,
- *      in the same order they were attached.
- *   4. Labels the email (and any older unprocessed emails) as
- *      processed, so nothing is uploaded twice.
- *
- * The website's gallery reads directly from the "Live" folder,
- * so step 3 is what makes new bulletins appear on the site.
- *
- * This script must run on a timer (see setup instructions in
- * README.md) — Gmail has no way to "instantly" notify a script,
- * so a check every 5 minutes is the standard, reliable way to
- * get bulletins onto the site within a few minutes of being sent.
- * ============================================================
  */
 
 const LABEL_NAME = 'Bulletin-Processed';
@@ -35,13 +16,11 @@ function processBulletinEmail() {
     throw new Error('LIVE_FOLDER_ID / ARCHIVE_FOLDER_ID are not set. Run setup() once first — see README.md.');
   }
 
-  // Newest-first search for anything not yet processed that has an attachment.
-  const threads = GmailApp.search('has:attachment -label:' + LABEL_NAME, 0, 20);
-  if (threads.length === 0) return; // nothing new — normal on most runs
+  // FIXED: Restricted to 'in:inbox' so Drafts and Sent emails are ignored.
+  const threads = GmailApp.search('in:inbox has:attachment -label:' + LABEL_NAME, 0, 20);
+  if (threads.length === 0) return; // Nothing new — exits without archiving or touching anything.
 
-  // The first thread returned is the most recent. Only its attachments
-  // get uploaded; every thread found (including older ones) gets labelled
-  // so they are never picked up again.
+  // The first thread returned is the most recent.
   const newestThread = threads[0];
   const newestMessage = getLatestMessageWithAttachments_(newestThread);
 
@@ -50,6 +29,7 @@ function processBulletinEmail() {
     uploadAttachmentsInOrder_(newestMessage, liveFolderId);
   }
 
+  // Label all found threads so they are never picked up again.
   threads.forEach(t => t.addLabel(label));
 }
 
@@ -74,13 +54,14 @@ function archiveCurrentLiveFiles_(liveFolderId, archiveFolderId) {
 /** Saves a message's attachments into the Live folder, preserving attachment order. */
 function uploadAttachmentsInOrder_(message, liveFolderId) {
   const liveFolder = DriveApp.getFolderById(liveFolderId);
-  const attachments = message.getAttachments({ includeInlineImages: false, includeAttachments: true });
+  const attachments = message.getAttachments({ includeInlineImages: true, includeAttachments: true });
 
   attachments.forEach((attachment, index) => {
-    // Zero-padded prefix keeps the gallery's display order identical
-    // to the order files were attached in the email.
     const prefix = String(index + 1).padStart(2, '0') + '_';
-    liveFolder.createFile(attachment.copyBlob()).setName(prefix + attachment.getName());
+    
+    // FIXED: Correctly assign 'file' inside the loop and set permissions
+    const file = liveFolder.createFile(attachment.copyBlob()).setName(prefix + attachment.getName());
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
   });
 }
 
@@ -88,7 +69,7 @@ function uploadAttachmentsInOrder_(message, liveFolderId) {
 function getLatestMessageWithAttachments_(thread) {
   const messages = thread.getMessages();
   for (let i = messages.length - 1; i >= 0; i--) {
-    if (messages[i].getAttachments().length > 0) return messages[i];
+    if (messages[i].getAttachments({ includeInlineImages: true, includeAttachments: true }).length > 0) return messages[i];
   }
   return null;
 }
@@ -97,15 +78,6 @@ function getOrCreateLabel_(name) {
   return GmailApp.getUserLabelByName(name) || GmailApp.createLabel(name);
 }
 
-/**
- * ============================================================
- * RUN THIS ONCE, MANUALLY, BEFORE ANYTHING ELSE.
- * Creates the "Live" and "Archive" Drive folders (if they don't
- * already exist) and stores their IDs for processBulletinEmail()
- * to use. Check the Execution Log (View → Logs) after running
- * for the Live Folder ID — you'll need it for js/gallery.js.
- * ============================================================
- */
 function setup() {
   const props = PropertiesService.getScriptProperties();
 
@@ -127,15 +99,7 @@ function setup() {
   Logger.log('ARCHIVE FOLDER ID (for reference only): ' + archiveFolderId);
 }
 
-/**
- * ============================================================
- * RUN THIS ONCE, MANUALLY, AFTER setup().
- * Installs the 5-minute timer that keeps the gallery updated.
- * ============================================================
- */
 function installTrigger() {
-  // Remove any existing triggers for this function first, so re-running
-  // this doesn't create duplicates.
   ScriptApp.getProjectTriggers()
     .filter(t => t.getHandlerFunction() === 'processBulletinEmail')
     .forEach(t => ScriptApp.deleteTrigger(t));
