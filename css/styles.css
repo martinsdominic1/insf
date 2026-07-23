@@ -151,6 +151,11 @@ nav.scrolled { box-shadow: var(--shadow-md); }
   pointer-events: auto;
   visibility: visible;
 }
+.nav-drawer a {
+  display: block; padding: 13px 16px; border-radius: 12px;
+  color: var(--text-mid); text-decoration: none; font-size: 0.95rem; font-weight: 700;
+  transition: background 0.2s, color 0.2s; -webkit-tap-highlight-color: transparent;
+}
 .nav-drawer a:hover, .nav-drawer a:active { background: var(--blue-pale); color: var(--blue); }
 .nav-drawer .drawer-btn {
   margin-top: 10px; background: var(--blue) !important; color: white !important; text-align: center;
