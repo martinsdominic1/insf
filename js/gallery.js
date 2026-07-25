@@ -5,10 +5,10 @@
 
 const DRIVE_CONFIG = {
   API_KEY: 'AIzaSyDrPlwlZADTG3n5uIF0Q6wVJhazwG59m9s',
-  BULLETIN_LIVE_FOLDER_ID: '1jixWzuWYvGlg4Nqw3AsdF8Hgu7BMyJ_F',
+  BULLETIN_LIVE_FOLDER_ID: '1I5UMXbBOnQOu9rrA8BswfbhUSoV3w1hr',
   // ⚠️ Run setup() in the Apps Script (after pasting the updated Code.gs)
   // then replace this with the "Notices Live Folder" ID it logs out.
-  NOTICE_LIVE_FOLDER_ID: '1DwYr3AnLBuAnHm70EspF72awcoLMkAP3',
+  NOTICE_LIVE_FOLDER_ID: '16_joiA8XA1sIs_gQPEKNQfHmr-Z-23kc',
 };
 
 document.addEventListener('DOMContentLoaded', () => {
