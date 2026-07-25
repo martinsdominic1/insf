@@ -1,27 +1,33 @@
 /* ============================================================
-   BULLETIN GALLERY — pulls files from a public Google Drive
-   folder and renders them in our own gallery grid.
+   BULLETIN + NOTICES GALLERIES — each pulls from its own public
+   Google Drive folder and renders inline into its own grid.
    ============================================================ */
 
 const DRIVE_CONFIG = {
   API_KEY: 'AIzaSyDrPlwlZADTG3n5uIF0Q6wVJhazwG59m9s',
-  LIVE_FOLDER_ID: '1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd',
+  BULLETIN_LIVE_FOLDER_ID: '1fZNbAdJJVgaLa1YFntc50Mtq0PwEdSgd',
+  // ⚠️ Run setup() in the Apps Script (after pasting the updated Code.gs)
+  // then replace this with the "Notices Live Folder" ID it logs out.
+  NOTICE_LIVE_FOLDER_ID: '1RG_LtQHHfSojjnuS5bBHAajxjdqlYC9j',
 };
 
-document.addEventListener('DOMContentLoaded', loadBulletinGallery);
+document.addEventListener('DOMContentLoaded', () => {
+  loadGallery('galleryGrid', DRIVE_CONFIG.BULLETIN_LIVE_FOLDER_ID, 'bulletins');
+  loadGallery('noticesGrid', DRIVE_CONFIG.NOTICE_LIVE_FOLDER_ID, 'notices');
+});
 
-async function loadBulletinGallery() {
-  const grid = document.getElementById('galleryGrid');
+async function loadGallery(gridId, folderId, label) {
+  const grid = document.getElementById(gridId);
   if (!grid) return;
 
-  if (DRIVE_CONFIG.API_KEY.startsWith('REPLACE_') || DRIVE_CONFIG.LIVE_FOLDER_ID.startsWith('REPLACE_')) {
-    grid.innerHTML = `<div class="gallery-empty">Bulletin gallery isn't connected yet — add your Google Drive API key and folder ID in <code>js/gallery.js</code>.</div>`;
+  if (!DRIVE_CONFIG.API_KEY || DRIVE_CONFIG.API_KEY.startsWith('REPLACE_') || !folderId || folderId.startsWith('REPLACE_')) {
+    grid.innerHTML = `<div class="gallery-empty">${label} gallery isn't connected yet — add the Drive API key and folder ID in <code>js/gallery.js</code>.</div>`;
     return;
   }
 
   try {
     const fields = 'files(id,name,mimeType,thumbnailLink,webViewLink,createdTime)';
-    const q = encodeURIComponent(`'${DRIVE_CONFIG.LIVE_FOLDER_ID}' in parents and trashed = false`);
+    const q = encodeURIComponent(`'${folderId}' in parents and trashed = false`);
     const url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=${fields}&orderBy=createdTime&key=${DRIVE_CONFIG.API_KEY}`;
 
     const res = await fetch(url);
@@ -30,20 +36,20 @@ async function loadBulletinGallery() {
     const files = data.files || [];
 
     if (files.length === 0) {
-      grid.innerHTML = `<div class="gallery-empty">No bulletins uploaded yet. Once one is emailed in, it will appear here automatically.</div>`;
+      grid.innerHTML = `<div class="gallery-empty">No ${label} uploaded yet. Once one is emailed in, it will appear here automatically.</div>`;
       return;
     }
 
     grid.innerHTML = files.map(renderCard).join('');
   } catch (err) {
-    console.error('Could not load bulletin gallery:', err);
-    grid.innerHTML = `<div class="gallery-empty">Bulletins couldn't be loaded right now. Please check back shortly.</div>`;
+    console.error(`Could not load ${label} gallery:`, err);
+    grid.innerHTML = `<div class="gallery-empty">${label} couldn't be loaded right now. Please check back shortly.</div>`;
   }
 }
 
 function renderCard(file) {
   const isImage = file.mimeType && file.mimeType.startsWith('image/');
-  
+
   // Notice the '/preview' URL format for Google Drive PDFs
   const embedUrl = isImage ? `https://lh3.googleusercontent.com/d/${file.id}` : `https://drive.google.com/file/d/${file.id}/preview`;
 
