@@ -97,7 +97,7 @@ const translations = {
     nav_contact_drawer: "📞 Contacte-nos",
 
     hero_tag: "Paróquia Católica Portuguesa · Benoni",
-    hero_h1: "Igreja de<br><em>Nossa Senhora de Fátima</em><br><span class=\"gold\">Brentwood Park</span>",
+    hero_h1: "<em>Nossa Senhora de Fátima</em><br>Igreja Católica<br><span class=\"gold\">Brentwood Park</span>",
     hero_sub: "Uma comunidade paroquial enraizada na devoção a Nossa Senhora de Fátima desde a década de 1940. Todos são bem-vindos para participar na Missa, consultar os nossos boletins mais recentes, ou contactar o secretariado paroquial abaixo.",
     btn_view_mass: "🕊️ Ver Horários das Missas",
     btn_hire_hall: "🏛️ Alugar o Salão Paroquial",
@@ -185,22 +185,9 @@ function applyLanguage(lang) {
 
   document.documentElement.lang = lang === "pt" ? "pt" : "en";
 
-  const flagBtn = document.getElementById("langToggle");
-  const flagImg = document.getElementById("langFlagImg");
-  if (flagImg) {
-    if (lang === "pt") {
-      flagImg.src = "https://flagcdn.com/w40/pt.png";
-      flagImg.srcset = "https://flagcdn.com/w80/pt.png 2x";
-      flagImg.alt = "Português";
-    } else {
-      flagImg.src = "https://flagcdn.com/w40/gb.png";
-      flagImg.srcset = "https://flagcdn.com/w80/gb.png 2x";
-      flagImg.alt = "English";
-    }
-  }
-  if (flagBtn) {
-    flagBtn.title = lang === "pt" ? "Switch to English" : "Switch to Português";
-  }
+  document.querySelectorAll(".lang-option").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+  });
 
   localStorage.setItem(STORAGE_KEY, lang);
 }
@@ -244,6 +231,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   applyLanguage(lang);
 
   const toggle = document.getElementById("langToggle");
-  const flip = () => setLanguage(currentLanguage() === "pt" ? "en" : "pt");
-  if (toggle) toggle.addEventListener("click", flip);
+  const dropdown = document.getElementById("langDropdown");
+
+  const closeDropdown = () => {
+    if (!dropdown) return;
+    dropdown.hidden = true;
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+  };
+
+  const openDropdown = () => {
+    if (!dropdown) return;
+    dropdown.hidden = false;
+    if (toggle) toggle.setAttribute("aria-expanded", "true");
+  };
+
+  if (toggle && dropdown) {
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.hidden ? openDropdown() : closeDropdown();
+    });
+
+    document.querySelectorAll(".lang-option").forEach(btn => {
+      btn.addEventListener("click", () => {
+        setLanguage(btn.getAttribute("data-lang"));
+        closeDropdown();
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.hidden && !dropdown.contains(e.target) && e.target !== toggle) {
+        closeDropdown();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeDropdown();
+    });
+  }
 });
