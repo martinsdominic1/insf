@@ -119,6 +119,24 @@ nav.scrolled { box-shadow: var(--shadow-md); }
 }
 .nav-btn:hover { background: var(--blue-dark) !important; transform: translateY(-1px); }
 
+/* Groups the flag toggle and hamburger so nav's space-between doesn't push them apart */
+.nav-actions { display: flex; align-items: center; gap: 6px; }
+
+.lang-flag-btn {
+  border: 1px solid var(--border);
+  background: transparent;
+  padding: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+.lang-flag-btn:hover { border-color: var(--blue); }
+.lang-flag-btn img { width: 100%; height: 100%; object-fit: cover; }
+
 /* Hamburger */
 .nav-hamburger {
   display: none; flex-direction: column; justify-content: center; align-items: center;

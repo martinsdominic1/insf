@@ -23,26 +23,31 @@
     <div class="nav-name">Igreja de Nossa Senhora de Fátima<span>Brentwood Park, Benoni</span></div>
   </a>
   <ul class="nav-links">
-    <li><a href="#mass-times">Mass Times</a></li>
-    <li><a href="#bulletins">Bulletins</a></li>
-    <li><a href="#notices">Notices</a></li>
+    <li><a href="#mass-times" data-i18n="nav_mass">Mass Times</a></li>
+    <li><a href="#bulletins" data-i18n="nav_bulletins">Bulletins</a></li>
+    <li><a href="#notices" data-i18n="nav_notices">Notices</a></li>
 <!--    <li><a href="history.html">Our History</a></li> -->
-    <li><a href="#hall-hire">Hall Hire</a></li>
-    <li><a href="#contact" class="nav-btn">Contact</a></li>
+    <li><a href="#hall-hire" data-i18n="nav_hall">Hall Hire</a></li>
+    <li><a href="#contact" class="nav-btn" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-  </button>
+  <div class="nav-actions">
+    <button id="langToggle" class="lang-flag-btn" type="button" aria-label="Switch language" title="Switch to Português">
+      <img id="langFlagImg" src="https://flagcdn.com/w40/gb.png" srcset="https://flagcdn.com/w80/gb.png 2x" alt="English" width="26" height="26">
+    </button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+  </div>
 </nav>
 
 <!-- MOBILE DRAWER -->
 <div class="nav-drawer" id="navDrawer" aria-hidden="true">
-  <a href="#mass-times">Mass Times</a>
-  <a href="#bulletins">Bulletins</a>
-  <a href="#notices">Notices</a>
+  <a href="#mass-times" data-i18n="nav_mass">Mass Times</a>
+  <a href="#bulletins" data-i18n="nav_bulletins">Bulletins</a>
+  <a href="#notices" data-i18n="nav_notices">Notices</a>
 <!--  <a href="history.html">Our History</a> -->
-  <a href="#hall-hire">Hall Hire</a>
-  <a href="#contact" class="drawer-btn">📞 Contact Us</a>
+  <a href="#hall-hire" data-i18n="nav_hall">Hall Hire</a>
+  <a href="#contact" class="drawer-btn" data-i18n="nav_contact_drawer">📞 Contact Us</a>
 </div>
 
 <!-- HERO -->
@@ -56,16 +61,16 @@
       <div class="hero-crest" aria-hidden="true">
         <img src="img/church-crest.svg" alt="" class="hero-crest-img">
       </div>
-      <div class="hero-tag"><span class="hero-tag-dot"></span>Portuguese Catholic Parish · Benoni</div>
-      <h1 class="hero-h1"><em>Our lady of Fátima</em><br>Catholic Church<br><span class="gold">Brentwood Park</span></h1>
-      <p class="hero-sub">
+      <div class="hero-tag" data-i18n="hero_tag"><span class="hero-tag-dot"></span>Portuguese Catholic Parish · Benoni</div>
+      <h1 class="hero-h1" data-i18n-html="hero_h1"><em>Our lady of Fátima</em><br>Catholic Church<br><span class="gold">Brentwood Park</span></h1>
+      <p class="hero-sub" data-i18n="hero_sub">
         A parish community rooted in devotion to Our Lady of Fátima since the 1940s.
         All are welcome to join us for Mass, browse our latest bulletins, or reach out
         to the parish office below.
       </p>
       <div class="hero-btns">
-        <a href="#mass-times" class="btn-primary">🕊️ View Mass Times</a>
-        <a href="#hall-hire" class="btn-secondary">🏛️ Hire the Parish Hall</a>
+        <a href="#mass-times" class="btn-primary" data-i18n="btn_view_mass">🕊️ View Mass Times</a>
+        <a href="#hall-hire" class="btn-secondary" data-i18n="btn_hire_hall">🏛️ Hire the Parish Hall</a>
       </div>
     </div>
 
@@ -74,20 +79,20 @@
       <div class="stat-pair">
         <div class="stat-box">
           <span class="stat-num">16-12-1945</span>
-          <span class="stat-lbl">Foundation Stone Blessed</span>
+          <span class="stat-lbl" data-i18n="stat_lbl1">Foundation Stone Blessed</span>
         </div>
         <div class="stat-box gold">
           <span class="stat-num">14-11-1948</span>
-          <span class="stat-lbl">Inaugurated</span>
+          <span class="stat-lbl" data-i18n="stat_lbl2">Inaugurated</span>
         </div>
       </div>
       <div class="hero-rule"></div>
-      <div class="certs-label">Parish at a Glance</div>
+      <div class="certs-label" data-i18n="glance_label">Parish at a Glance</div>
       <div class="cert-list">
-        <div class="cert-row"><span class="cert-dot"></span>4 Masses every Weekend</div>
-        <div class="cert-row"><span class="cert-dot"></span>Daily Morning Mass, Monday–Friday</div>
-        <div class="cert-row"><span class="cert-dot"></span>Portuguese &amp; English Masses</div>
-        <div class="cert-row"><span class="cert-dot"></span>Parish hall available for hire</div>
+        <div class="cert-row"><span class="cert-dot"></span><span data-i18n="cert1">4 Masses every Weekend</span></div>
+        <div class="cert-row"><span class="cert-dot"></span><span data-i18n="cert2">Daily Morning Mass, Monday–Friday</span></div>
+        <div class="cert-row"><span class="cert-dot"></span><span data-i18n="cert3">Portuguese &amp; English Masses</span></div>
+        <div class="cert-row"><span class="cert-dot"></span><span data-i18n="cert4">Parish hall available for hire</span></div>
       </div>
     </div>
     </div>
@@ -97,29 +102,31 @@
 <!-- MASS TIMES -->
 <section id="mass-times" class="section-pad">
   <div class="section-inner">
-    <div class="eyebrow reveal">Join Us</div>
-    <h2 class="section-h2 reveal">Mass <em>Times</em></h2>
-	<p class="section-lead reveal">Please note: The Mass times below reflects our regular timetable. Special celebrations, festas, and parish events may affect these times. Refer to the weekly bulletin for updates and additional Masses.</p>
+    <div class="eyebrow reveal" data-i18n="mass_eyebrow">Join Us</div>
+    <h2 class="section-h2 reveal" data-i18n-html="mass_h2">Mass <em>Times</em></h2>
+	<p class="section-lead reveal" data-i18n="mass_lead">Please note: The Mass times below reflects our regular timetable. Special celebrations, festas, and parish events may affect these times. Refer to the weekly bulletin for updates and additional Masses.</p>
 
     <div class="schedule-grid">
       <div class="schedule-card reveal">
-        <div class="schedule-day">Weekdays</div>
-        <div class="schedule-note">Monday – Friday</div>
-        <div class="time-row"><span class="time-val">08:30</span><span class="time-lbl">(Portuguese)</span></div>
+        <div class="schedule-day" data-i18n="weekdays_day">Weekdays</div>
+        <div class="schedule-note" data-i18n="weekdays_note">Monday – Friday</div>
+        <div class="time-row"><span class="time-val">08:30</span><span class="time-lbl" data-i18n="mass_pt">(Portuguese Mass)</span></div>
       </div>
 
       <div class="schedule-card reveal">
-        <div class="schedule-day">Saturday</div>
-        <div class="schedule-note">1 Mass</div>
-        <div class="time-row"><span class="time-val">17:30</span><span class="time-lbl">(English)</span></div>
+        <div class="schedule-day" data-i18n="saturday_day">Saturday</div>
+        <div class="schedule-note" data-i18n="one_mass">1 Mass</div>
+        <div class="time-row"><span class="time-val">16:00-17:00</span><span class="time-lbl" data-i18n="confessions">(Confessions and Eucharistic Adoration)</span></div>
+        <div class="time-row"><span class="time-val">17:30</span><span class="time-lbl" data-i18n="mass_en">(English Mass)</span></div>
+
       </div>
 
       <div class="schedule-card featured reveal">
-        <div class="schedule-day">Sunday</div>
-        <div class="schedule-note">3 Masses</div>
-        <div class="time-row"><span class="time-val">07:30</span><span class="time-lbl">(Portuguese)</span></div>
-        <div class="time-row"><span class="time-val">09:00</span><span class="time-lbl">(Portuguese)</span></div>
-        <div class="time-row"><span class="time-val">11:00</span><span class="time-lbl">(English)</span></div>
+        <div class="schedule-day" data-i18n="sunday_day">Sunday</div>
+        <div class="schedule-note" data-i18n="three_masses">3 Masses</div>
+        <div class="time-row"><span class="time-val">07:30</span><span class="time-lbl" data-i18n="mass_pt">(Portuguese Mass)</span></div>
+        <div class="time-row"><span class="time-val">09:00</span><span class="time-lbl" data-i18n="mass_pt">(Portuguese Mass)</span></div>
+        <div class="time-row"><span class="time-val">11:00</span><span class="time-lbl" data-i18n="mass_en">(English Mass)</span></div>
       </div>
     </div>
   </div>
@@ -128,11 +135,11 @@
 <!-- BULLETINS -->
 <section id="bulletins" class="section-pad">
   <div class="section-inner">
-    <div class="eyebrow reveal">Stay Informed</div>
-    <h2 class="section-h2 reveal">Parish <em>Bulletins</em></h2>
+    <div class="eyebrow reveal" data-i18n="bulletins_eyebrow">Stay Informed</div>
+    <h2 class="section-h2 reveal" data-i18n-html="bulletins_h2">Parish <em>Bulletins</em></h2>
 
     <div class="gallery-grid" id="galleryGrid">
-      <div class="gallery-loading">Loading bulletins…</div>
+      <div class="gallery-loading" data-i18n="bulletins_loading">Loading bulletins…</div>
     </div>
   </div>
 </section>
@@ -140,11 +147,11 @@
 <!-- Notices -->
 <section id="notices" class="section-pad">
   <div class="section-inner">
-    <div class="eyebrow reveal">Find out more</div>
-    <h2 class="section-h2 reveal">Parish <em>Notices</em></h2>
+    <div class="eyebrow reveal" data-i18n="notices_eyebrow">Find out more</div>
+    <h2 class="section-h2 reveal" data-i18n-html="notices_h2">Parish <em>Notices</em></h2>
 
     <div class="gallery-grid" id="noticesGrid">
-      <div class="gallery-loading">Loading notices…</div>
+      <div class="gallery-loading" data-i18n="notices_loading">Loading notices…</div>
     </div>
   </div>
 </section>
@@ -183,30 +190,30 @@
 <!-- HALL HIRE -->
 <section id="hall-hire" class="section-pad">
   <div class="section-inner">
-    <div class="eyebrow reveal">Book a Venue</div>
-    <h2 class="section-h2 reveal">Hall for <em>Hire</em></h2>
-    <p class="section-lead reveal">Complete the form below to request the parish hall for your event. The parish office will confirm availability and next steps.</p>
+    <div class="eyebrow reveal" data-i18n="hall_eyebrow">Book a Venue</div>
+    <h2 class="section-h2 reveal" data-i18n-html="hall_h2">Hall for <em>Hire</em></h2>
+    <p class="section-lead reveal" data-i18n="hall_lead">Complete the form below to request the parish hall for your event. The parish office will confirm availability and next steps.</p>
 
     <div class="form-panel reveal">
       <div class="form-panel-head">
-        <h3>Parish Hall Hire Request</h3>
-        <p>Please complete all fields so that the office can process your request as quickly as possible.</p>
+        <h3 data-i18n="form_h3">Parish Hall Hire Request</h3>
+        <p data-i18n="form_p">Please complete all fields so that the office can process your request as quickly as possible.</p>
       </div>
       <div class="form-pills">
-        <span class="pill">Event date &amp; time</span>
-        <span class="pill">Expected guests</span>
-        <span class="pill">Type of event</span>
-        <span class="pill">Contact details</span>
-        <span class="pill">Setup requirements</span>
+        <span class="pill" data-i18n="pill1">Event date &amp; time</span>
+        <span class="pill" data-i18n="pill2">Expected guests</span>
+        <span class="pill" data-i18n="pill3">Type of event</span>
+        <span class="pill" data-i18n="pill4">Contact details</span>
+        <span class="pill" data-i18n="pill5">Setup requirements</span>
       </div>
       <div class="form-embed">
         <!-- Replace REPLACE_WITH_YOUR_FORM_ID with your actual Google Form ID -->
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfdzJLmUKtamte7Toag8Oh4c4ghFbHN6KSrZSF6m2up5SxJEg/viewform?embedded=true" title="Parish Hall Hire Request Form">Loading form…</iframe>
       </div>
       <div class="form-footer">
-        <p>💡 If the form doesn't display above, use the button to open it directly in a new tab.</p>
+        <p data-i18n="form_footer_p">💡 If the form doesn't display above, use the button to open it directly in a new tab.</p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdzJLmUKtamte7Toag8Oh4c4ghFbHN6KSrZSF6m2up5SxJEg/viewform" target="_blank" class="ext-btn">
-          Open Form
+          <span data-i18n="open_form">Open Form</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
       </div>
@@ -217,14 +224,14 @@
 <!-- CONTACT -->
 <section id="contact" class="section-pad">
   <div class="section-inner">
-    <div class="eyebrow reveal">Get in Touch</div>
-    <h2 class="section-h2 reveal">Contact &amp; <em>Location</em></h2>
-    <p class="section-lead reveal">Reach the parish office directly, or find us at Brentwood Park.</p>
+    <div class="eyebrow reveal" data-i18n="contact_eyebrow">Get in Touch</div>
+    <h2 class="section-h2 reveal" data-i18n-html="contact_h2">Contact &amp; <em>Location</em></h2>
+    <p class="section-lead reveal" data-i18n="contact_lead">Reach the parish office directly, or find us at Brentwood Park.</p>
 
     <div class="contact-layout">
       <div class="contact-sidebar">
         <div class="info-card reveal">
-  	  <div class="info-lbl">📍 Address</div>
+  	  <div class="info-lbl" data-i18n="address_lbl">📍 Address</div>
   	  <div class="info-val">
     	    <a href="https://maps.app.goo.gl/76GfUaRhtNnBrncL6?g_st=ic" target="_blank" rel="noopener">
       	      25 Van Wyk Rd<br>Brentwood Park AH, Benoni<br>Gauteng, South Africa
@@ -232,7 +239,7 @@
           </div>
 	 </div>
         <div class="info-card reveal">
-          <div class="info-lbl">☎️ Parish Secretary</div>
+          <div class="info-lbl" data-i18n="secretary_lbl">☎️ Parish Secretary</div>
           <div class="info-val placeholder"><a href="tel:(+27)82 576 3260">082 576 3260</a></div>
         </div>
 <!--        <div class="info-card reveal">
@@ -241,7 +248,7 @@
         </div>
 -->
         <div class="info-card reveal">
-          <div class="info-lbl">✉️ Parish Email</div>
+          <div class="info-lbl" data-i18n="email_lbl">✉️ Parish Email</div>
           <div class="info-val placeholder"><a href="mailto:ourladyfatimabenoni@gmail.com">ourladyfatimabenoni@gmail.com</a></div>
         </div>
 
@@ -250,18 +257,18 @@
         </div>
         <a href="https://maps.app.goo.gl/76GfUaRhtNnBrncL6?g_st=ic" target="_blank" class="dir-btn reveal">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          Open in Google Maps
+          <span data-i18n="dir_btn">Open in Google Maps</span>
         </a>
       </div>
 
       <div class="contact-main">
         <div class="social-card reveal">
           <div>
-            <h4>Follow the Parish on Facebook</h4>
-            <p>News, event photos and reminders posted between bulletins.</p>
+            <h4 data-i18n="fb_h4">Follow the Parish on Facebook</h4>
+            <p data-i18n="fb_p">News, event photos and reminders posted between bulletins.</p>
           </div>
           <!-- Replace with the real Facebook page URL -->
-          <a href="https://facebook.com/groups/2218807405313477" target="_blank" class="fb-btn">📘 Visit Facebook Page</a>
+          <a href="https://facebook.com/groups/2218807405313477" target="_blank" class="fb-btn" data-i18n="fb_btn">📘 Visit Facebook Page</a>
         </div>
       </div>
     </div>
@@ -273,21 +280,21 @@
   <div class="footer-grid">
     <div>
       <div class="footer-brand">Igreja de Nossa Senhora de Fátima</div>
-      <p class="footer-desc">Our Lady of Fátima Portuguese Catholic Church — Brentwood Park, Benoni.</p>
-      <div class="footer-badge">🕯️ Established 1945</div>
+      <p class="footer-desc" data-i18n="footer_desc">Our Lady of Fátima Portuguese Catholic Church — Brentwood Park, Benoni.</p>
+      <div class="footer-badge" data-i18n="footer_badge">🕯️ Established 1945</div>
     </div>
     <div>
-      <p class="fcol-title">Navigation</p>
+      <p class="fcol-title" data-i18n="footer_nav_title">Navigation</p>
       <ul class="flinks">
-        <li><a href="#mass-times">Mass Times</a></li>
-        <li><a href="#bulletins">Bulletins</a></li>
-        <li><a href="#notices">Notices</a></li>
+        <li><a href="#mass-times" data-i18n="nav_mass">Mass Times</a></li>
+        <li><a href="#bulletins" data-i18n="nav_bulletins">Bulletins</a></li>
+        <li><a href="#notices" data-i18n="nav_notices">Notices</a></li>
 <!--        <li><a href="history.html">Our History</a></li> -->
-        <li><a href="#hall-hire">Hall Hire</a></li>
+        <li><a href="#hall-hire" data-i18n="nav_hall">Hall Hire</a></li>
       </ul>
     </div>
     <div>
-      <p class="fcol-title">Contact</p>
+      <p class="fcol-title" data-i18n="footer_contact_title">Contact</p>
       <ul class="flinks">
         <li><a href="tel:(+27)82 576 3260">082 576 3260</a></li>
         <li><a href="mailto:ourladyfatimabenoni@gmail.com">ourladyfatimabenoni@gmail.com</a></li>
@@ -299,12 +306,13 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Igreja de Nossa Senhora de Fátima, Brentwood Park. All rights reserved.</p>
+    <p data-i18n="footer_rights">© 2026 Igreja de Nossa Senhora de Fátima, Brentwood Park. All rights reserved.</p>
     <p>Benoni, Gauteng, South Africa</p>
   </div>
 </footer>
 
 <script src="js/main.js"></script>
 <script src="js/gallery.js"></script>
+<script src="js/i18n.js"></script>
 </body>
 </html>
