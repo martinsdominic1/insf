@@ -443,3 +443,14 @@ footer { background:#16262F; color:rgba(255,255,255,0.72); padding:64px 48px 36p
 .gallery-card:hover .gallery-btn {
   background: var(--blue-dark);
 }
+
+.lang-btn {
+  border: 1px solid currentColor;
+  background: transparent;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: inherit;
+}
+.lang-btn-drawer { margin-top: 12px; width: 100%; }
