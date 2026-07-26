@@ -97,7 +97,7 @@ const translations = {
     nav_contact_drawer: "📞 Contacte-nos",
 
     hero_tag: "Paróquia Católica Portuguesa · Benoni",
-    hero_h1: "<em>Nossa Senhora de Fátima</em><br>Igreja Católica<br><span class=\"gold\">Brentwood Park</span>",
+    hero_h1: "Igreja de<br><em>Nossa Senhora de Fátima</em><br><span class=\"gold\">Brentwood Park</span>",
     hero_sub: "Uma comunidade paroquial enraizada na devoção a Nossa Senhora de Fátima desde a década de 1940. Todos são bem-vindos para participar na Missa, consultar os nossos boletins mais recentes, ou contactar o secretariado paroquial abaixo.",
     btn_view_mass: "🕊️ Ver Horários das Missas",
     btn_hire_hall: "🏛️ Alugar o Salão Paroquial",
